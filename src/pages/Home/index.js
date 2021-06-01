@@ -6,8 +6,11 @@ import StatusbarPage from '../../components/StatusBarPage';
 import Menu from '../../components/Manu';
 
 import {
-    ContainerLogo,
-    Logo,
+  ContainerLogo,
+  Logo,
+  ContainerContent,
+  Title,
+  SubTitle,
   } from "./styles";
 
 export default function Home(){
@@ -25,6 +28,11 @@ export default function Home(){
          <ContainerLogo>
             <Logo source={require("../../assets/Logo.png")} resizeMode="contain" />
         </ContainerLogo>
+
+        <ContainerContent>
+         <Title>SujeitoLink</Title>
+         <SubTitle>Cole seu link para encurtar</SubTitle>
+        </ContainerContent>
 
      </LinearGradient>
  );
