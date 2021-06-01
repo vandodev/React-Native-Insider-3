@@ -4,6 +4,7 @@ import {View, Text} from 'react-native';
 import {LinearGradient} from 'expo-linear-gradient';
 import StatusbarPage from '../../components/StatusBarPage';
 import Menu from '../../components/Manu';
+import { Feather } from "@expo/vector-icons";
 
 import {
   ContainerLogo,
@@ -11,6 +12,11 @@ import {
   ContainerContent,
   Title,
   SubTitle,
+  BoxIcon,
+  Input,
+  ContainerInput,
+  ButtonLink,
+  ButtonLiknkText
   } from "./styles";
 
 export default function Home(){
@@ -30,8 +36,24 @@ export default function Home(){
         </ContainerLogo>
 
         <ContainerContent>
+            
          <Title>SujeitoLink</Title>
          <SubTitle>Cole seu link para encurtar</SubTitle>
+
+         <ContainerInput>
+          <BoxIcon>
+            <Feather name="link" size={22} color="#fff" />
+          </BoxIcon>
+          <Input
+            placeholder="Cole seu link aqui..."
+            placeholderTextColor="white"
+          />
+        </ContainerInput>
+
+        <ButtonLink>
+          <ButtonLiknkText>Gerar Link</ButtonLiknkText>
+        </ButtonLink>
+
         </ContainerContent>
 
      </LinearGradient>
