@@ -5,6 +5,11 @@ import {LinearGradient} from 'expo-linear-gradient';
 import StatusbarPage from '../../components/StatusBarPage';
 import Menu from '../../components/Manu';
 
+import {
+    ContainerLogo,
+    Logo,
+  } from "./styles";
+
 export default function Home(){
  return(
      <LinearGradient
@@ -17,7 +22,10 @@ export default function Home(){
          />
          <Menu />
 
-         <Text>Página Home</Text>
+         <ContainerLogo>
+            <Logo source={require("../../assets/Logo.png")} resizeMode="contain" />
+        </ContainerLogo>
+
      </LinearGradient>
  );
 }
