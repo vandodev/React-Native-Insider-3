@@ -5,7 +5,8 @@ import {LinearGradient} from 'expo-linear-gradient';
 import StatusbarPage from '../../components/StatusBarPage';
 import Menu from '../../components/Manu';
 import { Feather } from "@expo/vector-icons";
-import {TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform} from 'react-native';
+import {TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform, Modal} from 'react-native';
+
 
 import {
   ContainerLogo,
@@ -19,13 +20,16 @@ import {
   ButtonLink,
   ButtonLiknkText
   } from "./styles";
+import ModalLink from '../../components/ModalLink';
 
 export default function Home(){
 
 const [input, setInput] = useState('');
+const [modalVisible, setModalVisible] = useState(false);
 
 function handleShortLink(){
-    alert('url ecurtada')
+    //alert('url:' + input)
+    setModalVisible(true);
 }
 
  return(
@@ -75,6 +79,10 @@ function handleShortLink(){
 
                 </ContainerContent>
             </KeyboardAvoidingView>
+
+            <Modal visible={modalVisible} transparent animationType="slide">
+                <ModalLink />
+            </Modal>
 
         </LinearGradient>
      </TouchableWithoutFeedback>
