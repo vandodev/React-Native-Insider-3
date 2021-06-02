@@ -3,8 +3,15 @@ import {Text, TouchableOpacity, View, TouchableWithoutFeedback} from 'react-nati
 
 import {ModalContainer, Container, Header, LinlArea, Title, LongUrl, ShortLinkArea, ShortLinkUrl} from './styles';
 import {Feather} from '@expo/vector-icons';
+import Clipboard from 'expo-clipboard';
 
 export default function ModalLink({onClose}){
+
+    function copyLink(){
+        Clipboard.setString('http:\\meulink.com.br');
+        alert('Link copiado com sucesso')
+    }
+
     return(
         <ModalContainer>
 
@@ -39,10 +46,11 @@ export default function ModalLink({onClose}){
 
                <ShortLinkArea
                 activeOpacity={1}
+                onPress={copyLink}
                >
                     <ShortLinkUrl numberOfLines={1} >https:\\www.vandodev.com</ShortLinkUrl>
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={copyLink}>
                         <Feather
                             name="copy"
                             color="#fff"
