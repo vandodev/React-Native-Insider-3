@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text} from 'react-native';
 
 import {LinearGradient} from 'expo-linear-gradient';
@@ -21,6 +21,13 @@ import {
   } from "./styles";
 
 export default function Home(){
+
+const [input, setInput] = useState('');
+
+function handleShortLink(){
+    alert('url ecurtada')
+}
+
  return(
      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <LinearGradient
@@ -57,10 +64,12 @@ export default function Home(){
                     autoCapitalize="none"
                     autoCorrect={false}
                     keyboardType="url"
+                    value={input}
+                    onChangeText={(text)=> setInput(text)}
                 />
                 </ContainerInput>
 
-                <ButtonLink>
+                <ButtonLink onPress={handleShortLink}>
                 <ButtonLiknkText>Gerar Link</ButtonLiknkText>
                 </ButtonLink>
 
