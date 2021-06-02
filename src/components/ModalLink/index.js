@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TouchableOpacity, View, TouchableWithoutFeedback} from 'react-native';
+import {Text, TouchableOpacity, View, TouchableWithoutFeedback, Share, SafeAreaView} from 'react-native';
 
 import {ModalContainer, Container, Header, LinlArea, Title, LongUrl, ShortLinkArea, ShortLinkUrl} from './styles';
 import {Feather} from '@expo/vector-icons';
@@ -10,6 +10,27 @@ export default function ModalLink({onClose}){
     function copyLink(){
         Clipboard.setString('http:\\meulink.com.br');
         alert('Link copiado com sucesso')
+    }
+
+   async function handleShare(){
+        try{
+            const result = await Share.share({
+                message: 'Link: meulink.com'
+            })
+
+            if(result.action === Share.sharedAction){
+                if(result.activityType){
+                    console.log('Activetype');
+                }else{
+                    console.log('Compartilhado com sucesso')
+                }
+            }else if(result.action === Share.dismissedAction){
+                console.log('Modal fechado');
+            }
+
+        }catch(error){
+            console.log(error.message);
+        }
     }
 
     return(
@@ -30,7 +51,7 @@ export default function ModalLink({onClose}){
                 />
              </TouchableOpacity> 
 
-             <TouchableOpacity>
+             <TouchableOpacity onPress={handleShare}>
                 <Feather 
                     name="share"
                     color="#212743"
