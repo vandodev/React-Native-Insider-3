@@ -5,6 +5,7 @@ import {LinearGradient} from 'expo-linear-gradient';
 import StatusbarPage from '../../components/StatusBarPage';
 import Menu from '../../components/Manu';
 import { Feather } from "@expo/vector-icons";
+import {TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform} from 'react-native';
 
 import {
   ContainerLogo,
@@ -21,41 +22,52 @@ import {
 
 export default function Home(){
  return(
-     <LinearGradient
-        colors={['#1ddbb9', '#132742']}
-        style={{flex:1, justifyContent:'center'}}
-     >
-         <StatusbarPage
-            barStyle="Light-content"
-            backgroundColor="#1ddbb9"
-         />
-         <Menu />
+     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <LinearGradient
+            colors={['#1ddbb9', '#132742']}
+            style={{flex:1, justifyContent:'center'}}
+        >
+            <StatusbarPage
+                barStyle="Light-content"
+                backgroundColor="#1ddbb9"
+            />
+            <Menu />
 
-         <ContainerLogo>
-            <Logo source={require("../../assets/Logo.png")} resizeMode="contain" />
-        </ContainerLogo>
+            <KeyboardAvoidingView 
+                behavior={Platform.OS === 'android' ? 'padding' : 'position'}
+                enabled
+            >
 
-        <ContainerContent>
-            
-         <Title>SujeitoLink</Title>
-         <SubTitle>Cole seu link para encurtar</SubTitle>
+                <ContainerLogo>
+                    <Logo source={require("../../assets/Logo.png")} resizeMode="contain" />
+                </ContainerLogo>
 
-         <ContainerInput>
-          <BoxIcon>
-            <Feather name="link" size={22} color="#fff" />
-          </BoxIcon>
-          <Input
-            placeholder="Cole seu link aqui..."
-            placeholderTextColor="white"
-          />
-        </ContainerInput>
+                <ContainerContent>
+                    
+                <Title>SujeitoLink</Title>
+                <SubTitle>Cole seu link para encurtar</SubTitle>
 
-        <ButtonLink>
-          <ButtonLiknkText>Gerar Link</ButtonLiknkText>
-        </ButtonLink>
+                <ContainerInput>
+                <BoxIcon>
+                    <Feather name="link" size={22} color="#fff" />
+                </BoxIcon>
+                <Input
+                    placeholder="Cole seu link aqui..."
+                    placeholderTextColor="white"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    keyboardType="url"
+                />
+                </ContainerInput>
 
-        </ContainerContent>
+                <ButtonLink>
+                <ButtonLiknkText>Gerar Link</ButtonLiknkText>
+                </ButtonLink>
 
-     </LinearGradient>
+                </ContainerContent>
+            </KeyboardAvoidingView>
+
+        </LinearGradient>
+     </TouchableWithoutFeedback>
  );
 }
