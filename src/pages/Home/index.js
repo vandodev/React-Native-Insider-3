@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text} from 'react-native';
-
+import api from '../../services/api';
 import {LinearGradient} from 'expo-linear-gradient';
 import StatusbarPage from '../../components/StatusBarPage';
 import Menu from '../../components/Manu';
@@ -27,9 +27,18 @@ export default function Home(){
 const [input, setInput] = useState('');
 const [modalVisible, setModalVisible] = useState(false);
 
-function handleShortLink(){
-    //alert('url:' + input)
-    setModalVisible(true);
+async function handleShortLink(){
+    try{
+        const response = await api.post('/shorten', {
+            long_url: input
+        });
+        console.log(response.data);
+        
+    }catch(error){
+       alert('Algo deu errado' + error);
+       Keyboard.dismiss();
+       setInput('');
+    }
 }
 
  return(
