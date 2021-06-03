@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text} from 'react-native';
 import api from '../../services/api';
+import {saveLink} from '../../utils/storeLinks';
 import {LinearGradient} from 'expo-linear-gradient';
 import StatusbarPage from '../../components/StatusBarPage';
 import Menu from '../../components/Manu';
@@ -36,6 +37,9 @@ async function handleShortLink(){
         });
         setData(response.data);
         setModalVisible(true);
+
+        saveLink('sujeitolinks', response.data);
+
         Keyboard.dismiss();
         setLoading(false);
         setInput('');
