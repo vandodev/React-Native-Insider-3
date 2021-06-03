@@ -5,7 +5,7 @@ import {LinearGradient} from 'expo-linear-gradient';
 import StatusbarPage from '../../components/StatusBarPage';
 import Menu from '../../components/Manu';
 import { Feather } from "@expo/vector-icons";
-import {TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform, Modal} from 'react-native';
+import {TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform, Modal, ActivityIndicator} from 'react-native';
 
 
 import {
@@ -23,21 +23,26 @@ import {
 import ModalLink from '../../components/ModalLink';
 
 export default function Home(){
-
+const [loading, setLoading] = useState(false)
 const [input, setInput] = useState('');
 const [modalVisible, setModalVisible] = useState(false);
 
 async function handleShortLink(){
+    setLoading(true);
     try{
         const response = await api.post('/shorten', {
             long_url: input
         });
         console.log(response.data);
+        Keyboard.dismiss();
+        setLoading(false);
+        setInput('');
         
     }catch(error){
        alert('Algo deu errado' + error);
        Keyboard.dismiss();
        setInput('');
+       setLoading(false);
     }
 }
 
@@ -83,7 +88,16 @@ async function handleShortLink(){
                 </ContainerInput>
 
                 <ButtonLink onPress={handleShortLink}>
-                <ButtonLiknkText>Gerar Link</ButtonLiknkText>
+                    {
+                        loading ? (
+                            <ActivityIndicator
+                                color='#121212'
+                                size={12}
+                            />
+                      ) : (
+                        <ButtonLinkText>Gerar Link</ButtonLinkText>
+                    )
+                    }
                 </ButtonLink>
 
                 </ContainerContent>
