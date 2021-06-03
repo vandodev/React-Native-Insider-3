@@ -1,12 +1,33 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {useIsFocused} from '@react-navigation/native';
 import StatusbarPage from '../../components/StatusBarPage';
 
 import {Container, Title, ListLinks} from './styles';
 import Menu from '../../components/Manu';
 import ListItem from '../../components/ListItem';
 
+import {getLinksSave} from '../../utils/storeLinks';
+
 export default function MyLink(){
+
+   const [links, setLinks] = useState([]);
+   const [data, setData] = useState({});
+   const [modalVisible, setModalVisible] = useState(false);
+
+   const isFocused = useIsFocused();
+
+   useEffect(()=>{
+
+      async function getLinks(){
+          const result = await getLinksSave('sujeitolinks');
+          setLinks(result);
+          //setLoading(false);
+      }
+
+      getLinks();
+
+  },[isFocused])
+
  return(
      <Container>
 
@@ -19,8 +40,7 @@ export default function MyLink(){
          <Title>Meus links</Title>
 
          <ListLinks
-            // data={[{id:1, link: 'meulink.com'}, {id:2, link: 'meulinkDois.com'}]}
-            data={[1,2,3,4,5,6,7,8]}
+            data={links}
             keyExtractor={(item) => String(item.id)}
             renderItem={({item}) => <ListItem data={item} />}
             contentConteinerStyle={{paddingBotton:20}}
