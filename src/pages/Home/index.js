@@ -18,7 +18,7 @@ import {
   Input,
   ContainerInput,
   ButtonLink,
-  ButtonLiknkText
+  ButtonLinkText
   } from "./styles";
 import ModalLink from '../../components/ModalLink';
 
@@ -26,6 +26,7 @@ export default function Home(){
 const [loading, setLoading] = useState(false)
 const [input, setInput] = useState('');
 const [modalVisible, setModalVisible] = useState(false);
+const [data, setData] = useState({});
 
 async function handleShortLink(){
     setLoading(true);
@@ -33,7 +34,8 @@ async function handleShortLink(){
         const response = await api.post('/shorten', {
             long_url: input
         });
-        console.log(response.data);
+        setData(response.data);
+        setModalVisible(true);
         Keyboard.dismiss();
         setLoading(false);
         setInput('');
@@ -104,7 +106,7 @@ async function handleShortLink(){
             </KeyboardAvoidingView>
 
             <Modal visible={modalVisible} transparent animationType="slide">
-                <ModalLink onClose={() => setModalVisible(false)} />
+                <ModalLink onClose={() => setModalVisible(false)} data={data} />
             </Modal>
 
         </LinearGradient>

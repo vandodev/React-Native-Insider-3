@@ -72,6 +72,6 @@ export const ButtonLink = styled.TouchableOpacity`
   margin-bottom: 15px;
 `;
 
-export const ButtonLiknkText = styled.Text`
+export const ButtonLinkText = styled.Text`
   font-size: 18px;
 `;
