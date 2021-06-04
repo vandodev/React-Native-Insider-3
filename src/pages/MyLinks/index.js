@@ -31,9 +31,9 @@ export default function MyLink(){
   },[isFocused]);
 
   function handleItem(item){
-   setData(item);
-   setModalVisible(true);
-}
+      setData(item);
+      setModalVisible(true);
+   }
 
  return(
      <Container>
