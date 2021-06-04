@@ -4,7 +4,7 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 import {Feather} from '@expo/vector-icons';
 import {ContainerButton,Item, ActionContainer} from './styles';
 
-export default function ListItem({data, selectedItem}){
+export default function ListItem({data, selectedItem, deleteItem}){
 
     function RightActions(){
         return(
@@ -20,7 +20,6 @@ export default function ListItem({data, selectedItem}){
 
     return(
         <View>
-
             <Swipeable renderRightActions={RightActions}>
                 <ContainerButton activeOpacity={0.9} onPress={() => selectedItem(data)}>
                     <Feather

@@ -8,7 +8,7 @@ import Menu from '../../components/Manu';
 import ModalLink from '../../components/ModalLink';
 import ListItem from '../../components/ListItem';
 
-import {getLinksSave} from '../../utils/storeLinks';
+import {getLinksSave, deleteLink} from '../../utils/storeLinks';
 
 export default function MyLink(){
 
@@ -35,6 +35,11 @@ export default function MyLink(){
       setModalVisible(true);
    }
 
+   async function handleDelete(id){
+      const result = await deleteLink(links, id);
+      setLinks(result);
+   }
+
  return(
      <Container>
 
@@ -49,13 +54,13 @@ export default function MyLink(){
          <ListLinks
             data={links}
             keyExtractor={(item) => String(item.id)}
-            renderItem={({item}) => <ListItem data={item} selectedItem={handleItem} /> }
+            renderItem={({item}) => <ListItem data={item} selectedItem={handleItem} deleteItem={handleDelete} /> }
             contentConteinerStyle={{paddingBotton:20}}
             showVerticalScrollindicator={false}
          />
 
             <Modal visible={modalVisible} transparent animationType="slide">  
-                <ModalLink onClose={() => setModalVisible(false)} data={data} />
+                <ModalLink onClose={() => setModalVisible(false)} data={data} deleteItem={handleDelete} />
             </Modal>
 
     </Container>
