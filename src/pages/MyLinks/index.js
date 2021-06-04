@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
+import {Modal} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 import StatusbarPage from '../../components/StatusBarPage';
 
 import {Container, Title, ListLinks} from './styles';
 import Menu from '../../components/Manu';
+import ModalLink from '../../components/ModalLink';
 import ListItem from '../../components/ListItem';
 
 import {getLinksSave} from '../../utils/storeLinks';
@@ -26,7 +28,12 @@ export default function MyLink(){
 
       getLinks();
 
-  },[isFocused])
+  },[isFocused]);
+
+  function handleItem(item){
+   setData(item);
+   setModalVisible(true);
+}
 
  return(
      <Container>
@@ -42,10 +49,14 @@ export default function MyLink(){
          <ListLinks
             data={links}
             keyExtractor={(item) => String(item.id)}
-            renderItem={({item}) => <ListItem data={item} />}
+            renderItem={({item}) => <ListItem data={item} selectedItem={handleItem} /> }
             contentConteinerStyle={{paddingBotton:20}}
             showVerticalScrollindicator={false}
          />
+
+            <Modal visible={modalVisible} transparent animationType="slide">  
+                <ModalLink onClose={() => setModalVisible(false)} data={data} />
+            </Modal>
 
     </Container>
  );

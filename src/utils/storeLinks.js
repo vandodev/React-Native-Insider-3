@@ -25,8 +25,3 @@ export async function saveLink(key, newLink){
     await AsyncStorage.setItem(key, JSON.stringify(linksStored));
     console.log('Link salvo com sucesso')
 }
-
-//deletar algum link especifico
-export async function deleteLink(links, id){
-
-}

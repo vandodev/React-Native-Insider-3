@@ -3,10 +3,10 @@ import {View, Text} from 'react-native';
 import {Feather} from '@expo/vector-icons';
 import {ContainerButton,Item} from './styles';
 
-export default function ListItem({data}){
+export default function ListItem({data, selectedItem}){
     return(
         <View>
-            <ContainerButton activeOpacity={0.9}>
+            <ContainerButton activeOpacity={0.9} onPress={() => selectedItem(data)}>
                 <Feather
                     name="link"
                     color="#fff"
