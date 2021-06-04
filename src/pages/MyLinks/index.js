@@ -3,7 +3,7 @@ import {Modal} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 import StatusbarPage from '../../components/StatusBarPage';
 
-import {Container, Title, ListLinks} from './styles';
+import {Container, Title, ListLinks, ContainerEmpty} from './styles';
 import Menu from '../../components/Manu';
 import ModalLink from '../../components/ModalLink';
 import ListItem from '../../components/ListItem';
@@ -50,6 +50,13 @@ export default function MyLink(){
          <Menu />
 
          <Title>Meus links</Title>
+
+         { !loading && links.length === 0 && (
+                <ContainerEmpty>
+                    <WarningText>Você ainda não possui links :[</WarningText>
+                </ContainerEmpty>
+            )
+         }
 
          <ListLinks
             data={links}
