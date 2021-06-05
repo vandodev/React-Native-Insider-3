@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {Modal} from 'react-native';
+import {Modal, ActivityIndicator} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 import StatusbarPage from '../../components/StatusBarPage';
 
-import {Container, Title, ListLinks, ContainerEmpty} from './styles';
+import {Container, Title, ListLinks, ContainerEmpty, WarningText} from './styles';
 import Menu from '../../components/Manu';
 import ModalLink from '../../components/ModalLink';
 import ListItem from '../../components/ListItem';
@@ -15,6 +15,7 @@ export default function MyLink(){
    const [links, setLinks] = useState([]);
    const [data, setData] = useState({});
    const [modalVisible, setModalVisible] = useState(false);
+   const [loading, setLoading] = useState(true);
 
    const isFocused = useIsFocused();
 
@@ -23,7 +24,7 @@ export default function MyLink(){
       async function getLinks(){
           const result = await getLinksSave('sujeitolinks');
           setLinks(result);
-          //setLoading(false);
+          setLoading(false);
       }
 
       getLinks();
@@ -51,12 +52,19 @@ export default function MyLink(){
 
          <Title>Meus links</Title>
 
-         { !loading && links.length === 0 && (
+         { loading && (
+                <ContainerEmpty>
+                   <ActivityIndicator color="#FFF" size={25} />
+                </ContainerEmpty>
+            )
+            }
+
+            { !loading && links.length === 0 && (
                 <ContainerEmpty>
                     <WarningText>Você ainda não possui links :[</WarningText>
                 </ContainerEmpty>
             )
-         }
+            }
 
          <ListLinks
             data={links}
